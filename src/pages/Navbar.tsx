@@ -1,8 +1,9 @@
 import React from "react";
+import Hero from "../components/ui/Hero";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   return (
-    <div>
+    <div className="bg-white dark:bg-darker">
       <nav className="fixed z-10 w-full bg-white dark:bg-transparent md:absolute md:bg-transparent">
         <div className="container m-auto px-2 md:px-12 lg:px-7">
           <div className="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
@@ -19,16 +20,16 @@ const Navbar: React.FC = () => {
                 className="flex space-x-2 items-center"
               >
                 <img
-                  src="images/icon.png"
+                  src="https://png.pngtree.com/template/20190316/ourmid/pngtree-books-logo-image_79143.jpg"
                   className="w-12"
                   alt="tailus logo"
                   width="144"
                   height="133"
                 />
                 <span className="text-2xl font-bold text-yellow-900 dark:text-white">
-                  Tailus{" "}
+                  Read &{" "}
                   <span className="text-yellow-700 dark:text-yellow-300">
-                    Feedus
+                    Discover
                   </span>
                 </span>
               </a>
@@ -118,6 +119,9 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </nav>
+      <div>
+        <Hero />
+      </div>
     </div>
   );
 };

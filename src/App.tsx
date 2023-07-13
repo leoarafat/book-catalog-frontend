@@ -1,3 +1,5 @@
+import Hero from "./components/ui/Hero";
+import Login from "./pages/Login";
 import Navbar from "./pages/Navbar";
 
 function App() {
@@ -5,7 +7,7 @@ function App() {
     <>
       <div>
         <Navbar />
-        <h1>Hello world</h1>
+        <Login />
       </div>
     </>
   );
