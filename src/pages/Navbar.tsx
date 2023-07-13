@@ -79,14 +79,6 @@ const Navbar = () => {
                         <span>All Books</span>
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        to="/add-new-book"
-                        className="block md:px-4 transition dark:text-gray-300 dark:hover:text-yellow-300 hover:text-yellow-700"
-                      >
-                        <span>Add New</span>
-                      </Link>
-                    </li>
                   </ul>
                 </div>
 

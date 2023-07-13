@@ -60,28 +60,6 @@ const Register = () => {
                     }`}
                   >
                     <input
-                      type="name"
-                      id="name"
-                      placeholder="Your Name"
-                      {...register("name", { required: "Name is required" })}
-                      className={`w-full bg-transparent pb-3 border-b border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none ${
-                        errors.name ? "invalid:border-red-400" : ""
-                      } transition`}
-                    />
-                  </div>
-                  {errors.name && (
-                    <span className="text-red-400">
-                      {/* {errors.email.message} */}
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <div
-                    className={`relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-sky-400 dark:before:bg-sky-800 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-400 before:transition before:duration-300 ${
-                      errors.email ? "before:bg-red-400" : ""
-                    }`}
-                  >
-                    <input
                       type="email"
                       id="email"
                       placeholder="Your email or user name"
@@ -134,7 +112,7 @@ const Register = () => {
                     className="w-full rounded-full bg-sky-500 dark:bg-sky-400 h-11 flex items-center justify-center px-6 py-3 transition hover:bg-sky-600 focus:bg-sky-600 active:bg-sky-800"
                   >
                     <span className="text-base font-semibold text-white dark:text-gray-900">
-                      Login
+                      SignUp
                     </span>
                   </button>
                   <button type="reset" className="-ml-3 w-max p-3">

@@ -1,0 +1,212 @@
+[
+    {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Classic",
+        "publicationDate": "July 11, 1960",
+        "reviews": []
+    },
+    {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Classic",
+        "publicationDate": "April 10, 1925",
+        "reviews": []
+    },
+    {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "genre": "Classic",
+        "publicationDate": "January 28, 1813",
+        "reviews": []
+    },
+    {
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Dystopian",
+        "publicationDate": "June 8, 1949",
+        "reviews": []
+    },
+    {
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "genre": "Coming-of-age",
+        "publicationDate": "July 16, 1951",
+        "reviews": []
+    },
+    {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "publicationDate": "September 21, 1937",
+        "reviews": []
+    },
+    {
+        "title": "Moby-Dick",
+        "author": "Herman Melville",
+        "genre": "Adventure",
+        "publicationDate": "October 18, 1851",
+        "reviews": []
+    },
+    {
+        "title": "Jane Eyre",
+        "author": "Charlotte Brontë",
+        "genre": "Gothic",
+        "publicationDate": "October 16, 1847",
+        "reviews": []
+    },
+    {
+        "title": "The Lord of the Rings",
+        "author": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "publicationDate": "July 29, 1954",
+        "reviews": []
+    },
+    {
+        "title": "Brave New World",
+        "author": "Aldous Huxley",
+        "genre": "Dystopian",
+        "publicationDate": "June 18, 1932",
+        "reviews": []
+    },
+    {
+        "title": "The Odyssey",
+        "author": "Homer",
+        "genre": "Epic",
+        "publicationDate": "8th century BCE",
+        "reviews": []
+    },
+    {
+        "title": "Frankenstein",
+        "author": "Mary Shelley",
+        "genre": "Gothic",
+        "publicationDate": "January 1, 1818",
+        "reviews": []
+    },
+    {
+        "title": "The Adventures of Tom Sawyer",
+        "author": "Mark Twain",
+        "genre": "Adventure",
+        "publicationDate": "1876",
+        "reviews": []
+    },
+    {
+        "title": "The Chronicles of Narnia",
+        "author": "C.S. Lewis",
+        "genre": "Fantasy",
+        "publicationDate": "1950-1956",
+        "reviews": []
+    },
+    {
+        "title": "Crime and Punishment",
+        "author": "Fyodor Dostoevsky",
+        "genre": "Psychological",
+        "publicationDate": "1866",
+        "reviews": []
+    },
+    {
+        "title": "Wuthering Heights",
+        "author": "Emily Brontë",
+        "genre": "Gothic",
+        "publicationDate": "1847",
+        "reviews": []
+    },
+    {
+        "title": "The Picture of Dorian Gray",
+        "author": "Oscar Wilde",
+        "genre": "Gothic",
+        "publicationDate": "June 20, 1890",
+        "reviews": []
+    },
+    {
+        "title": "The Scarlet Letter",
+        "author": "Nathaniel Hawthorne",
+        "genre": "Historical",
+        "publicationDate": "March 16, 1850",
+        "reviews": []
+    },
+    {
+        "title": "One Hundred Years of Solitude",
+        "author": "Gabriel García Márquez",
+        "genre": "Magical realism",
+        "publicationDate": "May 30, 1967",
+        "reviews": []
+    },
+    {
+        "title": "The Iliad",
+        "author": "Homer",
+        "genre": "Epic",
+        "publicationDate": "8th century BCE",
+        "reviews": []
+    },
+    {
+        "title": "The Grapes of Wrath",
+        "author": "John Steinbeck",
+        "genre": "Historical",
+        "publicationDate": "April 14, 1939",
+        "reviews": []
+    },
+    {
+        "title": "The Count of Monte Cristo",
+        "author": "Alexandre Dumas",
+        "genre": "Adventure",
+        "publicationDate": "1844-1846",
+        "reviews": []
+    },
+    {
+        "title": "Great Expectations",
+        "author": "Charles Dickens",
+        "genre": "Classic",
+        "publicationDate": "1860-1861",
+        "reviews": []
+    },
+    {
+        "title": "The Adventures of Huckleberry Finn",
+        "author": "Mark Twain",
+        "genre": "Adventure",
+        "publicationDate": "1884",
+        "reviews": []
+    },
+    {
+        "title": "Anna Karenina",
+        "author": "Leo Tolstoy",
+        "genre": "Historical",
+        "publicationDate": "1878",
+        "reviews": []
+    },
+    {
+        "title": "The Brothers Karamazov",
+        "author": "Fyodor Dostoevsky",
+        "genre": "Philosophical",
+        "publicationDate": "1880",
+        "reviews": []
+    },
+    {
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "genre": "Philosophical",
+        "publicationDate": "1988",
+        "reviews": []
+    },
+    {
+        "title": "Lord of the Flies",
+        "author": "William Golding",
+        "genre": "Allegorical",
+        "publicationDate": "September 17, 1954",
+        "reviews": []
+    },
+    {
+        "title": "Les Misérables",
+        "author": "Victor Hugo",
+        "genre": "Historical",
+        "publicationDate": "1862",
+        "reviews": []
+    },
+    {
+        "title": "Gone with the Wind",
+        "author": "Margaret Mitchell",
+        "genre": "Historical",
+        "publicationDate": "June 30, 1936",
+        "reviews": []
+    }
+]

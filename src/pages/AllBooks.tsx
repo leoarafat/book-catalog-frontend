@@ -51,6 +51,11 @@ export const AllBooks = () => {
               <option value="">Genre</option>
             </select>
           </div>
+          <div className="max-w-xl">
+            <button className="px-6 py-3 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+              Add New Book
+            </button>
+          </div>
         </div>
       </div>
       <div className="col-span-1 md:col-span-1 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-10 pb-8 md:pb-12 lg:pb-0">
