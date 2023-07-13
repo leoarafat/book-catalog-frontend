@@ -1,10 +1,11 @@
 import { BsFillHeartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="relative bg-yellow-50 dark:bg-gray-900">
       <div className="bg-white dark:bg-darker">
-        <nav className="fixed z-10 w-full bg-white dark:bg-transparent md:absolute md:bg-transparent">
+        <nav className="w-full bg-white dark:bg-transparent">
           <div className="container m-auto px-2 md:px-12 lg:px-7">
             <div className="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
               <input
@@ -61,10 +62,7 @@ const Navbar = () => {
               ></label>
               <div className="hidden peer-checked:flex w-full flex-col lg:flex lg:flex-row justify-end z-30 items-center gap-y-6 p-6 rounded-xl bg-white dark:bg-gray-900 lg:gap-y-0 lg:p-0 md:flex-nowrap lg:bg-transparent lg:w-7/12">
                 <div className="text-gray-600 lg:pr-4 w-full">
-                  <ul
-                    className="tracking-wide font-medium  text-sm 
-                        flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full"
-                  >
+                  <ul className="tracking-wide font-medium  text-sm flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
                     <li>
                       <Link
                         to="/"
@@ -75,7 +73,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <Link
-                        to="all-books"
+                        to="/all-books"
                         className="block md:px-4 transition dark:text-gray-300 dark:hover:text-yellow-300 hover:text-yellow-700"
                       >
                         <span>All Books</span>
@@ -92,16 +90,13 @@ const Navbar = () => {
                   </ul>
                 </div>
 
-                <div
-                  className="w-full min-w-max space-y-2 
-                    border-yellow-200 lg:space-y-0 sm:w-max lg:border-l dark:lg:border-gray-700"
-                >
+                <div className="w-full min-w-max space-y-2 border-yellow-200 lg:space-y-0 sm:w-max lg:border-l dark:lg:border-gray-700">
                   <button
                     type="button"
                     title="Start buying"
                     className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 dark:active:bg-gray-700 dark:focus:bg-gray-800 focus:bg-yellow-100 sm:w-max"
                   >
-                    <span className="block text-yellow-800 ">
+                    <span className="block text-yellow-800">
                       <BsFillHeartFill />
                     </span>
                   </button>

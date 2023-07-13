@@ -1,5 +1,4 @@
 import Hero from "../components/ui/Hero";
-import Footer from "./Footer";
 import { TopBooks } from "./TopBooks";
 
 const Home = () => {
@@ -7,7 +6,6 @@ const Home = () => {
     <div>
       <Hero />
       <TopBooks />
-      <Footer />
     </div>
   );
 };

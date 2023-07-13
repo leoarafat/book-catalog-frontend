@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -93,7 +94,7 @@ const Login = () => {
                   <button type="reset" className="-ml-3 w-max p-3">
                     <span className="text-sm tracking-wide text-sky-600 dark:text-sky-400">
                       Don't have an account?
-                      <a href="/login">Register</a>
+                      <Link to="/sign-up">Register</Link>
                     </span>
                   </button>
                 </div>
@@ -102,18 +103,18 @@ const Login = () => {
             <div className="border-t pt-12 text-gray-500 dark:border-gray-800">
               <div className="space-x-4 text-center">
                 <span>&copy; Read & Discover</span>
-                <a
-                  href="#"
+                <Link
+                  to=""
                   className="text-sm hover:text-sky-900 dark:hover:text-gray-300"
                 >
                   Contact
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="#/"
                   className="text-sm hover:text-sky-900 dark:hover:text-gray-300"
                 >
                   Privacy & Terms
-                </a>
+                </Link>
               </div>
             </div>
           </div>
