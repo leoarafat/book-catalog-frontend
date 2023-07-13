@@ -7,6 +7,8 @@ function App() {
     <>
       <div>
         <Navbar />
+
+        <Hero />
         <Login />
       </div>
     </>
