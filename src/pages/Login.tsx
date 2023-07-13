@@ -1,87 +1,125 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) => {
+    // Handle form submission here
+    console.log(data);
+  };
+
   return (
-    <>
-      <div className="relative py-16">
-        <div className="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
-          <div className="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
-            <div className="rounded-3xl border border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
-              <div className="p-8 py-12 sm:p-16">
-                <h2 className="mb-8 text-2xl font-bold text-gray-800 dark:text-white">
-                  Sign in to your account
-                </h2>
-                <form action="" className="space-y-8">
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="text-gray-600 dark:text-gray-300"
-                    >
-                      Email
-                    </label>
+    <div>
+      <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
+        <div className="mx-auto h-full sm:w-max">
+          <div className="m-auto  py-12">
+            <div className="mt-12 rounded-3xl border bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
+              <h3 className="text-2xl font-semibold text-gray-700 dark:text-white">
+                Login into your account
+              </h3>
+
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="mt-10 space-y-8 dark:text-white"
+              >
+                <div>
+                  <div
+                    className={`relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-sky-400 dark:before:bg-sky-800 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-400 before:transition before:duration-300 ${
+                      errors.email ? "before:bg-red-400" : ""
+                    }`}
+                  >
                     <input
                       type="email"
-                      name="email"
                       id="email"
-                      autoComplete="username"
-                      className="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                      placeholder="Your email or user name"
+                      {...register("email", { required: "Email is required" })}
+                      className={`w-full bg-transparent pb-3 border-b border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none ${
+                        errors.email ? "invalid:border-red-400" : ""
+                      } transition`}
                     />
                   </div>
+                  {errors.email && (
+                    <span className="text-red-400">
+                      {/* {errors.email.message} */}
+                    </span>
+                  )}
+                </div>
 
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <label
-                        htmlFor="pwd"
-                        className="text-gray-600 dark:text-gray-300"
-                      >
-                        Password
-                      </label>
-                      <button className="-mr-2 p-2" type="reset">
-                        <span className="text-sm text-primary">
-                          Forgot your password ?
-                        </span>
-                      </button>
-                    </div>
+                <div className="flex flex-col items-end">
+                  <div
+                    className={`w-full relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-sky-400 dark:before:bg-sky-800 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-400 before:transition before:duration-300 ${
+                      errors.password ? "before:bg-red-400" : ""
+                    }`}
+                  >
                     <input
                       type="password"
-                      name="pwd"
-                      id="pwd"
-                      autoComplete="current-password"
-                      className="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                      id="password"
+                      placeholder="Your password"
+                      {...register("password", {
+                        required: "Password is required",
+                      })}
+                      className={`w-full bg-transparent pb-3 border-b border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none ${
+                        errors.password ? "invalid:border-red-400" : ""
+                      } transition`}
                     />
                   </div>
-
-                  <button
-                    type="submit"
-                    className="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
-                  >
-                    <span className="relative text-base font-semibold text-white dark:text-dark">
-                      Connect
+                  {errors.password && (
+                    <span className="text-red-400">
+                      {/* {errors.password.message} */}
+                    </span>
+                  )}
+                  <button type="reset" className="-mr-3 w-max p-3">
+                    <span className="text-sm tracking-wide text-sky-600 dark:text-sky-400">
+                      Forgot password ?
                     </span>
                   </button>
+                </div>
 
-                  <p className="border-t border-gray-100 dark:border-gray-700 pt-6 text-sm text-gray-500 dark:text-gray-400">
-                    Don't have an account ?
-                    <a href="#" className="text-primary">
-                      Sign up
-                    </a>
-                  </p>
-                </form>
-              </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-sky-500 dark:bg-sky-400 h-11 flex items-center justify-center px-6 py-3 transition hover:bg-sky-600 focus:bg-sky-600 active:bg-sky-800"
+                  >
+                    <span className="text-base font-semibold text-white dark:text-gray-900">
+                      Login
+                    </span>
+                  </button>
+                  <button type="reset" className="-ml-3 w-max p-3">
+                    <span className="text-sm tracking-wide text-sky-600 dark:text-sky-400">
+                      Don't have an account?
+                      <a href="/login">Register</a>
+                    </span>
+                  </button>
+                </div>
+              </form>
             </div>
-            <div className="space-x-4 text-center text-gray-500">
-              <span>&copy; tailus</span>
-              <a href="#" className="text-sm hover:text-primary">
-                Contact
-              </a>
-              <a href="#" className="text-sm hover:text-primary">
-                Privacy & Terms
-              </a>
+            <div className="border-t pt-12 text-gray-500 dark:border-gray-800">
+              <div className="space-x-4 text-center">
+                <span>&copy; Read & Discover</span>
+                <a
+                  href="#"
+                  className="text-sm hover:text-sky-900 dark:hover:text-gray-300"
+                >
+                  Contact
+                </a>
+                <a
+                  href="#"
+                  className="text-sm hover:text-sky-900 dark:hover:text-gray-300"
+                >
+                  Privacy & Terms
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
