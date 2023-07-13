@@ -3,10 +3,10 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 
-import { AddNewBook } from "../pages/AddNew";
+import { AddNewBook } from "../pages/AddNewBook";
 import App from "../App";
 import { AllBooks } from "../pages/AllBooks";
-import { DetailsBook } from "../components/DetailsBook";
+import BookCard from "../components/DetailsBook";
 
 export const routes = createBrowserRouter([
   {
@@ -26,9 +26,13 @@ export const routes = createBrowserRouter([
         element: <AllBooks />,
       },
       {
-        path: "/details-book/:id",
-        element: <DetailsBook />,
+        path: "/details-book",
+        element: <BookCard />,
       },
+      // {
+      //   path: "/details-book/:id",
+      //   element: <DetailsBook />,
+      // },
       {
         path: "/login",
         element: <Login />,
