@@ -1,7 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { BsFillHeartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setUser } from "../redux/features/user/userSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 const Navbar = () => {
+  const { user } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      dispatch(setUser(null));
+    });
+  };
   return (
     <div className="relative bg-yellow-50 dark:bg-gray-900">
       <div className="bg-white dark:bg-darker">
@@ -92,18 +110,32 @@ const Navbar = () => {
                       <BsFillHeartFill />
                     </span>
                   </button>
-                  <Link to="/login">
-                    {" "}
-                    <button
-                      type="button"
-                      title="Start buying"
-                      className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
-                    >
-                      <span className="block text-yellow-900 font-semibold text-sm">
-                        Login
-                      </span>
-                    </button>
-                  </Link>
+                  <>
+                    {user?.email ? (
+                      <button
+                        type="button"
+                        title="Want to Logout?"
+                        className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                      >
+                        <span className="block text-yellow-900 font-semibold text-sm">
+                          LogOut
+                        </span>
+                      </button>
+                    ) : (
+                      <Link to="/login">
+                        {" "}
+                        <button
+                          type="button"
+                          title="Start buying"
+                          className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                        >
+                          <span className="block text-yellow-900 font-semibold text-sm">
+                            Login
+                          </span>
+                        </button>
+                      </Link>
+                    )}
+                  </>
                 </div>
               </div>
             </div>
