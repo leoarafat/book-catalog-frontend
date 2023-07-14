@@ -1,4 +1,8 @@
-export const TopBookCard = ({ ...booksData }) => {
+import { IBooks } from "../types/globalTypes";
+
+export const TopBookCard = ({ book }) => {
+  console.log(book);
+  const { author, genre, publicationDate, title } = book;
   return (
     <div>
       <div className="p-8 py-12 sm:p-12 rounded-3xl bg-white border border-gray-100 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10">
@@ -12,14 +16,14 @@ export const TopBookCard = ({ ...booksData }) => {
           />
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold text-gray-800 transition dark:text-white">
-              First feature
+              {title}
             </h3>
+            <p className="text-gray-600 dark:text-gray-300">Author: {author}</p>
+            <p className="text-gray-600 dark:text-gray-300">Genre: {author}</p>
             <p className="text-gray-600 dark:text-gray-300">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe
-              nesciunt neque culpa hic illum ab qui error repellendus asperiores
-              unde ut ipsam perferendis nemo fuga cum, eum consectetur, magnam
-              doloremque!
+              Published: {publicationDate}
             </p>
+
             <a
               href="#"
               className="group relative flex mx-auto h-12 w-12 items-center justify-center before:absolute before:inset-0 before:rounded-full before:border before:border-gray-200 before:bg-gray-50 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800"

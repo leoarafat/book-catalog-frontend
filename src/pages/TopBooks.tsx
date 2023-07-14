@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { TopBookCard } from "../components/TopBookCard";
+import { useGetBooksQuery } from "../redux/features/books/bookApi";
+import { IBooks } from "../types/globalTypes";
 
 export const TopBooks = () => {
-  let booksData: [];
+  const { data, isLoading, isError, isSuccess } = useGetBooksQuery(null);
+
   return (
     <div>
       <div className="py-16">
@@ -13,10 +19,9 @@ export const TopBooks = () => {
             </h2>
           </div>
           <div className="mt-16 grid gap-8 sm:w-2/3 sm:mx-auto md:w-full md:grid-cols-2 md:-mx-8 lg:grid-cols-3">
-            {/* {booksData?.map((book) => (
+            {data?.data.map((book: IBooks) => (
               <TopBookCard book={book} />
-            ))} */}
-            <TopBookCard />
+            ))}
           </div>
         </div>
       </div>

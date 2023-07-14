@@ -1,13 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { configureStore } from "@reduxjs/toolkit";
 import booksSlice from "./features/books/booksSlice";
+import { api } from "./api/apiSlice";
 
 export const store = configureStore({
   reducer: {
-    //    user: ,
     book: booksSlice,
+    [api.reducerPath]: api.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
