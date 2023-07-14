@@ -1,25 +1,31 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Link } from "react-router-dom";
-import { useState, ChangeEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, ChangeEvent, useEffect } from "react";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import TopBookCard from "../components/BookCard";
 import { IBooks } from "../types/globalTypes";
 import { toast } from "react-hot-toast";
-
-interface Book {
-  title: string;
-  author: string;
-  genre: string;
-  publicationDate: string;
-}
+import { useAppSelector } from "../redux/hooks";
 
 export const AllBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
+  const navigate = useNavigate();
+
+  const { user } = useAppSelector((state) => state.user);
+  console.log(user);
   const { data, isLoading, isError, isSuccess } = useGetBooksQuery(null);
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate, user]);
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const searchQueryValue = e.target.value;
     console.log(searchQueryValue);
@@ -43,6 +49,7 @@ export const AllBooks = () => {
   if (isError) {
     toast.error("Something went wrong");
   }
+
   return (
     <>
       {isSuccess && (
@@ -101,11 +108,19 @@ export const AllBooks = () => {
                 </select>
               </div>
               <div className="max-w-xl">
-                <Link to="/add-new-book">
-                  <button className="px-6 py-3 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    Add New Book
-                  </button>
-                </Link>
+                {user.email ? (
+                  <Link to="/add-new-book">
+                    <button className="px-6 py-3 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                      Add New Book
+                    </button>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <button className="px-6 py-3 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                      Add New Book
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

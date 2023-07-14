@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { BsFillHeartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { BsFillHeartFill } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setUser } from "../redux/features/user/userSlice";
 import { signOut } from "firebase/auth";
@@ -20,6 +21,7 @@ const Navbar = () => {
       dispatch(setUser(null));
     });
   };
+
   return (
     <div className="relative bg-yellow-50 dark:bg-gray-900">
       <div className="bg-white dark:bg-darker">

@@ -63,12 +63,10 @@ const DetailsBook: React.FC<BookData> = () => {
 
   const handleCommentSubmit = () => {
     console.log(comment);
-
     const options = {
       id: id,
       data: { reviews: comment },
     };
-
     postComment(options);
     setComment("");
   };
