@@ -113,6 +113,7 @@ const Navbar = () => {
                   <>
                     {user?.email ? (
                       <button
+                        onClick={handleLogout}
                         type="button"
                         title="Want to Logout?"
                         className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"

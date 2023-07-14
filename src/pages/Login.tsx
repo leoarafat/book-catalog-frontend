@@ -1,20 +1,34 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginFormInputs } from "../types/globalTypes";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { loginUser } from "../redux/features/user/userSlice";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data: any) => {
+  } = useForm<LoginFormInputs>();
+  const { user, isLoading } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const onSubmit = (data: LoginFormInputs) => {
     // Handle form submission here
+    dispatch(loginUser({ email: data.email, password: data.password }));
     console.log(data);
   };
-
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate("/");
+    }
+  }, [user.email, isLoading, navigate]);
   return (
     <div>
       <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
@@ -72,7 +86,7 @@ const Login = () => {
                   </div>
                   {errors.password && (
                     <span className="text-red-400">
-                      {/* {errors.password.message} */}
+                      {errors.password.message}
                     </span>
                   )}
                   <button type="reset" className="-mr-3 w-max p-3">

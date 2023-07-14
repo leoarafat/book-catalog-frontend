@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React from "react";
+
 import { useForm } from "react-hook-form";
+import { SignUpFormInputs } from "../types/globalTypes";
+import { useAppDispatch } from "../redux/hooks";
+import { createUser } from "../redux/features/user/userSlice";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data: any) => {
+  } = useForm<SignUpFormInputs>();
+  const dispatch = useAppDispatch();
+  const onSubmit = (data: SignUpFormInputs) => {
     // Handle form submission here
+    dispatch(createUser({ email: data.email, password: data.password }));
     console.log(data);
   };
 

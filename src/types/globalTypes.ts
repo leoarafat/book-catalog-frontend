@@ -20,3 +20,11 @@ export interface BookData {
   publicationDate: string;
   reviews: string[];
 }
+export interface LoginFormInputs {
+  email: string;
+  password: string;
+}
+export interface SignUpFormInputs {
+  email: string;
+  password: string;
+}
