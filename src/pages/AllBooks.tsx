@@ -4,28 +4,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Link, useNavigate } from "react-router-dom";
-import { useState, ChangeEvent, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useState, ChangeEvent } from "react";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import TopBookCard from "../components/BookCard";
 import { IBooks } from "../types/globalTypes";
 import { toast } from "react-hot-toast";
 import { useAppSelector } from "../redux/hooks";
+import PrivateRoute from "../routes/privateRoutes";
 
 export const AllBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
-  const navigate = useNavigate();
 
   const { user } = useAppSelector((state) => state.user);
-  console.log(user);
+
   const { data, isLoading, isError, isSuccess } = useGetBooksQuery(null);
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate, user]);
+
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const searchQueryValue = e.target.value;
     console.log(searchQueryValue);
@@ -107,6 +103,7 @@ export const AllBooks = () => {
                   <option value="Three">Three</option>
                 </select>
               </div>
+
               <div className="max-w-xl">
                 {user.email ? (
                   <Link to="/add-new-book">
