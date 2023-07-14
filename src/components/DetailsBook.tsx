@@ -19,7 +19,7 @@ import { BookData } from "../types/globalTypes";
 
 const DetailsBook: React.FC<BookData> = () => {
   const [comment, setComment] = useState("");
-  // const [reviewList, setReviewList] = useState<string[]>([]);
+
   const { id } = useParams();
   const { data: reviewList } = useGetCommentQuery(id, {
     refetchOnMountOrArgChange: true,
@@ -61,10 +61,6 @@ const DetailsBook: React.FC<BookData> = () => {
     });
   };
 
-  const handleEditBook = () => {
-    // Implement edit book logic here
-  };
-
   const handleCommentSubmit = () => {
     console.log(comment);
 
@@ -90,11 +86,8 @@ const DetailsBook: React.FC<BookData> = () => {
             <div>
               <div className="flex mb-4 justify-between">
                 {" "}
-                <Link to={`/details-book/${id}`}>
-                  <button
-                    className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
-                    onClick={handleEditBook}
-                  >
+                <Link to={`/update-book/${id}`}>
+                  <button className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors">
                     <FaEdit className="inline-block mr-1" />
                     Edit Book
                   </button>
