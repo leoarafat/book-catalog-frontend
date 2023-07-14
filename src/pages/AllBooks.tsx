@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Link } from "react-router-dom";
-import { AllBookCard } from "../components/AllBookCard";
 import { useState, ChangeEvent } from "react";
+import { useGetBooksQuery } from "../redux/features/books/bookApi";
+import TopBookCard from "../components/BookCard";
+import { IBooks } from "../types/globalTypes";
 
 interface Book {
   title: string;
@@ -13,7 +18,7 @@ export const AllBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
-
+  const { data, isLoading, isError, isSuccess } = useGetBooksQuery(null);
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const searchQueryValue = e.target.value;
     console.log(searchQueryValue);
@@ -94,10 +99,9 @@ export const AllBooks = () => {
         </div>
       </div>
       <div className="col-span-1 md:col-span-1 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-10 pb-8 md:pb-12 lg:pb-0">
-        {/* {booksData?.map((book: Book) => (
-          <AllBookCard book={book} key={book.id} />
-        ))} */}
-        <AllBookCard />
+        {data?.data.map((book: IBooks) => (
+          <TopBookCard book={book} />
+        ))}
       </div>
     </div>
   );

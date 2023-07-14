@@ -7,8 +7,11 @@ import { api } from "../../api/apiSlice";
 
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getBooks: builder.query({
+    getLatestBooks: builder.query({
       query: () => "/books/latest-book",
+    }),
+    getBooks: builder.query({
+      query: () => "/books",
     }),
     singleBook: builder.query({
       query: (id) => `/books/${id}`,
@@ -16,4 +19,5 @@ const bookApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetBooksQuery, useSingleBookQuery } = bookApi;
+export const { useGetLatestBooksQuery, useGetBooksQuery, useSingleBookQuery } =
+  bookApi;

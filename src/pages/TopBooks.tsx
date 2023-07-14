@@ -3,17 +3,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { toast } from "react-hot-toast";
-import TopBookCard from "../components/TopBookCard";
-import { useGetBooksQuery } from "../redux/features/books/bookApi";
+import TopBookCard from "../components/BookCard";
+import { useGetLatestBooksQuery } from "../redux/features/books/bookApi";
 import { IBooks } from "../types/globalTypes";
 
 export const TopBooks = () => {
-  const { data, isLoading, isError, isSuccess } = useGetBooksQuery(null);
+  const { data, isLoading, isError, isSuccess } = useGetLatestBooksQuery(null);
   if (isLoading) {
     return <p>Loading...</p>;
   }
   if (isError) {
-    return toast.error("Something went wrong");
+    toast.error("Something went wrong");
   }
   return (
     <div>

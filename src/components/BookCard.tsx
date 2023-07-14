@@ -7,8 +7,11 @@ interface TopBookCardProps {
 }
 
 const TopBookCard: FC<TopBookCardProps> = ({ book }) => {
-  const { _id, author, genre, title } = book;
+  const { _id, author, genre, publicationDate, title } = book;
 
+  const formattedPublicationDate = new Date(
+    publicationDate
+  ).toLocaleDateString();
   return (
     <Link to={`/book-details/${_id}`}>
       <div className="max-w-md mx-auto">
@@ -29,6 +32,9 @@ const TopBookCard: FC<TopBookCardProps> = ({ book }) => {
                 Author: {author}
               </p>
               <p className="text-gray-600 dark:text-gray-300">Genre: {genre}</p>{" "}
+              <p className="text-gray-600 dark:text-gray-300">
+                Published: {formattedPublicationDate}
+              </p>{" "}
               <p className="group relative flex mx-auto h-12 w-12 items-center justify-center before:absolute before:inset-0 before:rounded-full before:border before:border-gray-200 before:bg-gray-50 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

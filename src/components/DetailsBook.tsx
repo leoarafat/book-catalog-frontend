@@ -34,7 +34,7 @@ const DetailsBook: React.FC<BookData> = () => {
   const formattedPublicationDate = new Date(
     bookData?.data?.publicationDate
   ).toLocaleDateString();
-
+  console.log(bookData?.data);
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
