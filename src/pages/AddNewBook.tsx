@@ -1,23 +1,44 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FormValues } from "../types/globalTypes";
+import { useCreateBookMutation } from "../redux/features/books/bookApi";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const AddNewBook = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const onSubmit = (data: FormValues) => {
+  const [createBook, createBookOptions] = useCreateBookMutation();
+  const navigate = useNavigate();
+  const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    console.log(data);
-    // Perform submission logic, e.g., send data to the server
-
+    const result = await createBook(data);
+    if ("data" in result) {
+      reset();
+      navigate("/all-books/");
+      console.log("Book created successfully!");
+    } else {
+      console.error("Error creating book:", result.error);
+    }
     setIsSubmitting(false);
   };
+
+  // Handle success or error messages after book creation
+  if (createBookOptions.isSuccess) {
+    toast.success("Book created successfully!");
+  } else if (createBookOptions.isError) {
+    toast.error("Error creating book");
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto">

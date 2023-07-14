@@ -1,21 +1,60 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { FormValues } from "../types/globalTypes";
+import { FormValues, IBooks } from "../types/globalTypes";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useSingleBookQuery,
+  useUpdateBookMutation,
+} from "../redux/features/books/bookApi";
+import { toast } from "react-hot-toast";
 
 export const UpdateBook = () => {
+  const { id } = useParams();
+  const { data: book, isLoading, isError, refetch } = useSingleBookQuery(id);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [updateBookMutation] = useUpdateBookMutation();
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (formData: FormValues) => {
     setIsSubmitting(true);
 
-    setIsSubmitting(false);
+    try {
+      await updateBookMutation({ id, data: formData });
+
+      // Display a success toast
+      toast.success("Book updated successfully");
+      refetch();
+      navigate(`/book-details/${id}`);
+      // Reset the form
+      setIsSubmitting(false);
+    } catch (error) {
+      // Display an error toast
+      toast.error("Failed to update book");
+
+      // Reset the form
+      setIsSubmitting(false);
+    }
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error fetching book data</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto">
@@ -29,6 +68,7 @@ export const UpdateBook = () => {
         <input
           type="text"
           id="title"
+          defaultValue={book?.data?.title}
           {...register("title", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.title ? "border-red-500" : "border-gray-300"
@@ -49,6 +89,7 @@ export const UpdateBook = () => {
         <input
           type="text"
           id="author"
+          defaultValue={book?.data?.author}
           {...register("author", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.author ? "border-red-500" : "border-gray-300"
@@ -69,6 +110,7 @@ export const UpdateBook = () => {
         <input
           type="text"
           id="genre"
+          defaultValue={book?.data?.genre}
           {...register("genre", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.genre ? "border-red-500" : "border-gray-300"
@@ -89,6 +131,7 @@ export const UpdateBook = () => {
         <input
           type="text"
           id="publicationDate"
+          defaultValue={book?.data?.publicationDate}
           {...register("publicationDate", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.publicationDate ? "border-red-500" : "border-gray-300"

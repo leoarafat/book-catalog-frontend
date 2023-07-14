@@ -13,12 +13,12 @@ export type IBooks = {
   reviews: [];
 };
 export interface BookData {
-  _id: string;
+  _id?: string;
   title: string;
   author: string;
   genre: string;
   publicationDate: string;
-  reviews: string[];
+  reviews?: string[];
 }
 export interface LoginFormInputs {
   email: string;

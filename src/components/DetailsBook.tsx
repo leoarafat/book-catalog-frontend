@@ -9,8 +9,9 @@ import React, { useState, ChangeEvent } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
 import Swale from "sweetalert2";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  useDeleteBookMutation,
   useGetCommentQuery,
   usePostCommentMutation,
   useSingleBookQuery,
@@ -23,12 +24,14 @@ const DetailsBook: React.FC<BookData> = () => {
   const [comment, setComment] = useState("");
 
   const { id } = useParams();
-  const { data: reviewList } = useGetCommentQuery(id, {
+  const navigate = useNavigate();
+  const { data: reviewList, refetch } = useGetCommentQuery(id, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
   const { user } = useAppSelector((state) => state.user);
   const [postComment, options] = usePostCommentMutation();
+  const [deleteBook, deleteBookOptions] = useDeleteBookMutation();
 
   const {
     data: bookData,
@@ -57,8 +60,10 @@ const DetailsBook: React.FC<BookData> = () => {
       cancelButtonText: "Cancel",
     }).then((result: any) => {
       if (result.isConfirmed) {
-        // Perform delete book logic here
-        console.log("Book deleted");
+        deleteBook(id);
+        toast.success("Your book has been deleted.");
+        refetch();
+        navigate(`/all-books/`);
       }
     });
   };
@@ -72,10 +77,12 @@ const DetailsBook: React.FC<BookData> = () => {
     postComment(options);
     setComment("");
   };
-  if (isLoading) {
+
+  if (isLoading || deleteBookOptions.isLoading) {
     return <p>Loading...</p>;
   }
-  if (isError) {
+
+  if (isError || deleteBookOptions.isError) {
     return toast.error("Something went wrong");
   }
   return (
@@ -86,12 +93,14 @@ const DetailsBook: React.FC<BookData> = () => {
             <div>
               <div className="flex mb-4 justify-between">
                 {" "}
-                <Link to={`/update-book/${id}`}>
-                  <button className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors">
-                    <FaEdit className="inline-block mr-1" />
-                    Edit Book
-                  </button>
-                </Link>
+                {user?.email && (
+                  <Link to={`/update-book/${id}`}>
+                    <button className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors">
+                      <FaEdit className="inline-block mr-1" />
+                      Edit Book
+                    </button>
+                  </Link>
+                )}
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
                   onClick={handleDeleteBook}
