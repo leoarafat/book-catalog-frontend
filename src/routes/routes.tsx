@@ -6,6 +6,7 @@ import { AddNewBook } from "../pages/AddNewBook";
 import App from "../App";
 import { AllBooks } from "../pages/AllBooks";
 import DetailsBook from "../components/DetailsBook";
+import { UpdateBook } from "../components/UpdateBook";
 
 export const routes = createBrowserRouter([
   {
@@ -37,7 +38,10 @@ export const routes = createBrowserRouter([
           />
         ),
       },
-
+      {
+        path: "/update-book/:id",
+        element: <UpdateBook />,
+      },
       {
         path: "/login",
         element: <Login />,

@@ -9,32 +9,36 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
 import Swale from "sweetalert2";
 import { Link, useParams } from "react-router-dom";
-import { useSingleBookQuery } from "../redux/features/books/bookApi";
+import {
+  useGetCommentQuery,
+  usePostCommentMutation,
+  useSingleBookQuery,
+} from "../redux/features/books/bookApi";
 import { toast } from "react-hot-toast";
-
-interface BookData {
-  _id: string;
-  title: string;
-  author: string;
-  genre: string;
-  publicationDate: string;
-  reviews: string[];
-}
+import { BookData } from "../types/globalTypes";
 
 const DetailsBook: React.FC<BookData> = () => {
   const [comment, setComment] = useState("");
-  const [reviewList, setReviewList] = useState<string[]>([]);
+  // const [reviewList, setReviewList] = useState<string[]>([]);
   const { id } = useParams();
+  const { data: reviewList } = useGetCommentQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
+  console.log(reviewList);
+  const [postComment, options] = usePostCommentMutation();
+
   const {
     data: bookData,
     isLoading,
     isError,
     isSuccess,
   } = useSingleBookQuery(id);
+
   const formattedPublicationDate = new Date(
     bookData?.data?.publicationDate
   ).toLocaleDateString();
-  console.log(bookData?.data);
+
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
@@ -60,19 +64,24 @@ const DetailsBook: React.FC<BookData> = () => {
   const handleEditBook = () => {
     // Implement edit book logic here
   };
+
+  const handleCommentSubmit = () => {
+    console.log(comment);
+
+    const options = {
+      id: id,
+      data: { reviews: comment },
+    };
+
+    postComment(options);
+    setComment("");
+  };
   if (isLoading) {
     return <p>Loading...</p>;
   }
   if (isError) {
     return toast.error("Something went wrong");
   }
-  const handleCommentSubmit = () => {
-    if (comment.trim() !== "") {
-      setReviewList((prevList) => [...prevList, comment]);
-      setComment("");
-    }
-  };
-
   return (
     <>
       {isSuccess && (
@@ -138,11 +147,13 @@ const DetailsBook: React.FC<BookData> = () => {
           </button>
           <div className="mt-4">
             <h3 className="font-bold mb-2">Reviews:</h3>
-            {reviewList.length > 0 ? (
+            {reviewList?.data?.reviews.length > 0 ? (
               <ul className="list-disc list-inside">
-                {reviewList.map((review, index) => (
-                  <li key={index}>{review}</li>
-                ))}
+                {reviewList?.data?.reviews.map(
+                  (review: string, index: number) => (
+                    <li key={index}>{review}</li>
+                  )
+                )}
               </ul>
             ) : (
               <p>No reviews yet.</p>

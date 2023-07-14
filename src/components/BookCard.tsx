@@ -6,12 +6,13 @@ interface TopBookCardProps {
   book: IBooks;
 }
 
-const TopBookCard: FC<TopBookCardProps> = ({ book }) => {
+const BookCard: FC<TopBookCardProps> = ({ book }) => {
   const { _id, author, genre, publicationDate, title } = book;
 
   const formattedPublicationDate = new Date(
     publicationDate
   ).toLocaleDateString();
+
   return (
     <Link to={`/book-details/${_id}`}>
       <div className="max-w-md mx-auto">
@@ -57,4 +58,4 @@ const TopBookCard: FC<TopBookCardProps> = ({ book }) => {
   );
 };
 
-export default TopBookCard;
+export default BookCard;
