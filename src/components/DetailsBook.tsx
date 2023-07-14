@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -16,6 +17,7 @@ import {
 } from "../redux/features/books/bookApi";
 import { toast } from "react-hot-toast";
 import { BookData } from "../types/globalTypes";
+import { useAppSelector } from "../redux/hooks";
 
 const DetailsBook: React.FC<BookData> = () => {
   const [comment, setComment] = useState("");
@@ -25,7 +27,7 @@ const DetailsBook: React.FC<BookData> = () => {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
-  console.log(reviewList);
+  const { user } = useAppSelector((state) => state.user);
   const [postComment, options] = usePostCommentMutation();
 
   const {
@@ -129,13 +131,24 @@ const DetailsBook: React.FC<BookData> = () => {
             value={comment}
             onChange={handleCommentChange}
           ></textarea>
-          <button
-            className="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full text-sm flex items-center justify-center transition-colors"
-            onClick={handleCommentSubmit}
-          >
-            <CiLocationArrow1 className="mr-1" />
-            Add Comment
-          </button>
+          <>
+            {user?.email ? (
+              <button
+                className="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full text-sm flex items-center justify-center transition-colors"
+                onClick={handleCommentSubmit}
+              >
+                <CiLocationArrow1 className="mr-1" />
+                Add Comment
+              </button>
+            ) : (
+              <Link
+                className="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full text-sm flex items-center justify-center transition-colors"
+                to="/login"
+              >
+                Login first for reviewing book
+              </Link>
+            )}
+          </>
           <div className="mt-4">
             <h3 className="font-bold mb-2">Reviews:</h3>
             {reviewList?.data?.reviews.length > 0 ? (

@@ -5,13 +5,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Link } from "react-router-dom";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, Key } from "react";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import TopBookCard from "../components/BookCard";
 import { IBooks } from "../types/globalTypes";
 import { toast } from "react-hot-toast";
 import { useAppSelector } from "../redux/hooks";
-import PrivateRoute from "../routes/privateRoutes";
 
 export const AllBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -78,10 +77,11 @@ export const AllBooks = () => {
                   onChange={handleYearChange}
                   className="block px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-48"
                 >
-                  <option value="">All Years</option>
-                  <option value="2021">2021</option>
-                  <option value="2022">2022</option>
-                  <option value="2023">2023</option>
+                  {data?.data.map((book: IBooks) => (
+                    <option value="" key={book._id}>
+                      {new Date(book.publicationDate).toLocaleDateString()}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="max-w-xl">
@@ -97,6 +97,12 @@ export const AllBooks = () => {
                   onChange={handleGenreChange}
                   className="block px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-48"
                 >
+                  {data?.data.map((book: IBooks) => (
+                    <option value="" key={book._id}>
+                      {book.genre}
+                    </option>
+                  ))}
+
                   <option value="">All Genres</option>
                   <option value="One">One</option>
                   <option value="Two">Two</option>
