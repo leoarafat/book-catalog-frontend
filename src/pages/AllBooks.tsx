@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Link } from "react-router-dom";
-import { useState, ChangeEvent, Key } from "react";
+import { useState, ChangeEvent } from "react";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import TopBookCard from "../components/BookCard";
 import { IBooks } from "../types/globalTypes";
@@ -17,30 +17,51 @@ export const AllBooks = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
 
-  const { user } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state: { user: any }) => state.user);
 
-  const { data, isLoading, isError, isSuccess } = useGetBooksQuery(null);
+  const {
+    data: allBooks,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useGetBooksQuery(null);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const searchQueryValue = e.target.value;
-    console.log(searchQueryValue);
+    const searchQueryValue = e.target.value.toLowerCase(); // Convert to lowercase
     setSearchQuery(searchQueryValue);
   };
 
   const handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedYearValue = e.target.value;
-    console.log(selectedYearValue);
     setSelectedYear(selectedYearValue);
   };
 
   const handleGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedGenreValue = e.target.value;
-    console.log(selectedGenreValue);
     setSelectedGenre(selectedGenreValue);
   };
+
+  const filteredBooks = allBooks?.data.filter((book: IBooks) => {
+    const isMatchingSearch =
+      book.title.toLowerCase().includes(searchQuery) ||
+      book.author.toLowerCase().includes(searchQuery) ||
+      book.genre.includes(searchQuery);
+    const isMatchingYear =
+      selectedYear === "" ||
+      new Date(book.publicationDate).getFullYear().toString() === selectedYear;
+    const isMatchingGenre =
+      selectedGenre === "" || book.genre === selectedGenre;
+    return isMatchingSearch && isMatchingYear && isMatchingGenre;
+  });
+
+  const genreOptions: string[] = Array.from(
+    new Set(allBooks?.data.map((book: IBooks) => book.genre))
+  );
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
   if (isError) {
     toast.error("Something went wrong");
   }
@@ -77,9 +98,16 @@ export const AllBooks = () => {
                   onChange={handleYearChange}
                   className="block px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-48"
                 >
-                  {data?.data.map((book: IBooks) => (
-                    <option value="" key={book._id}>
-                      {new Date(book.publicationDate).toLocaleDateString()}
+                  <option value="">All Years</option>
+                  {Array.from(
+                    new Set(
+                      allBooks?.data.map((book: IBooks) =>
+                        new Date(book.publicationDate).getFullYear()
+                      )
+                    )
+                  ).map((year) => (
+                    <option value={year?.toString()} key={year?.toString()}>
+                      {year as number}
                     </option>
                   ))}
                 </select>
@@ -97,21 +125,16 @@ export const AllBooks = () => {
                   onChange={handleGenreChange}
                   className="block px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-48"
                 >
-                  {data?.data.map((book: IBooks) => (
-                    <option value="" key={book._id}>
-                      {book.genre}
+                  <option value="">All Genres</option>
+                  {genreOptions.map((genre: string) => (
+                    <option value={genre} key={genre}>
+                      {genre}
                     </option>
                   ))}
-
-                  <option value="">All Genres</option>
-                  <option value="One">One</option>
-                  <option value="Two">Two</option>
-                  <option value="Three">Three</option>
                 </select>
               </div>
-
               <div className="max-w-xl">
-                {user.email ? (
+                {user?.email ? (
                   <Link to="/add-new-book">
                     <button className="px-6 py-3 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
                       Add New Book
@@ -127,9 +150,10 @@ export const AllBooks = () => {
               </div>
             </div>
           </div>
+
           <div className="col-span-1 md:col-span-1 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-10 pb-8 md:pb-12 lg:pb-0">
-            {data?.data.map((book: IBooks) => (
-              <TopBookCard book={book} />
+            {filteredBooks?.map((book: IBooks) => (
+              <TopBookCard book={book} key={book._id} />
             ))}
           </div>
         </div>

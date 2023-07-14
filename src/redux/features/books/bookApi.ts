@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import { BookData } from "../../../types/globalTypes";
+import { BookData, IBooks } from "../../../types/globalTypes";
 import { api } from "../../api/apiSlice";
 
 const bookApi = api.injectEndpoints({
@@ -11,12 +11,13 @@ const bookApi = api.injectEndpoints({
     getLatestBooks: builder.query({
       query: () => "/books/latest-book",
     }),
+
     getBooks: builder.query({
-      query: () => "/books",
+      query: (params) => `/books${params ? `?${params}` : ""}`,
       providesTags: ["post", "deletepost"],
     }),
     createBook: builder.mutation<BookData, Partial<BookData>>({
-      query: (bookData) => ({
+      query: (bookData: IBooks) => ({
         url: "/books",
         method: "POST",
         body: bookData,
@@ -25,6 +26,7 @@ const bookApi = api.injectEndpoints({
     }),
     singleBook: builder.query({
       query: (id) => `/books/${id}`,
+      providesTags: ["update"],
     }),
     postComment: builder.mutation({
       query: ({ id, data }) => ({
@@ -44,6 +46,7 @@ const bookApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["update"],
     }),
     deleteBook: builder.mutation({
       query: (id) => ({

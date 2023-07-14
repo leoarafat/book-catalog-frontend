@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -35,7 +36,7 @@ export const UpdateBook = () => {
 
       // Display a success toast
       toast.success("Book updated successfully");
-      refetch();
+
       navigate(`/book-details/${id}`);
       // Reset the form
       setIsSubmitting(false);
@@ -131,7 +132,9 @@ export const UpdateBook = () => {
         <input
           type="text"
           id="publicationDate"
-          defaultValue={book?.data?.publicationDate}
+          defaultValue={new Date(
+            book?.data?.publicationDate
+          ).toLocaleDateString()}
           {...register("publicationDate", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.publicationDate ? "border-red-500" : "border-gray-300"
