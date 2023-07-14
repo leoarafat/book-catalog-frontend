@@ -29,10 +29,7 @@ export const routes = createBrowserRouter([
         path: "/details-book",
         element: <BookCard />,
       },
-      // {
-      //   path: "/details-book/:id",
-      //   element: <DetailsBook />,
-      // },
+
       {
         path: "/login",
         element: <Login />,
