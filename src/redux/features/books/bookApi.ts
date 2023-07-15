@@ -55,6 +55,20 @@ const bookApi = api.injectEndpoints({
       }),
       invalidatesTags: ["deletepost"],
     }),
+    createWishlist: builder.mutation<BookData, Partial<BookData>>({
+      query: (bookData: IBooks) => ({
+        url: "/books/wishlist",
+        method: "POST",
+        body: bookData,
+      }),
+      // invalidatesTags: ["post"],
+    }),
+    removeWishlist: builder.mutation<IBooks | null, string>({
+      query: (bookId) => ({
+        url: `/books/wishlist/${bookId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -67,4 +81,6 @@ export const {
   useUpdateBookMutation,
   useDeleteBookMutation,
   useCreateBookMutation,
+  useCreateWishlistMutation,
+  useRemoveWishlistMutation,
 } = bookApi;

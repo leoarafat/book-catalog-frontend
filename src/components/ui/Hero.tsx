@@ -1,4 +1,3 @@
-import React from "react";
 import heroImage from "../../assets/Reading glasses-cuate.png";
 const Hero = () => {
   return (

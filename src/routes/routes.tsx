@@ -7,6 +7,7 @@ import App from "../App";
 import { AllBooks } from "../pages/AllBooks";
 import DetailsBook from "../components/DetailsBook";
 import { UpdateBook } from "../components/UpdateBook";
+import { NotFound } from "../components/NotFound";
 
 export const routes = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const routes = createBrowserRouter([
       {
         path: "/sign-up",
         element: <Register />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

@@ -11,6 +11,7 @@ import TopBookCard from "../components/BookCard";
 import { IBooks } from "../types/globalTypes";
 import { toast } from "react-hot-toast";
 import { useAppSelector } from "../redux/hooks";
+import { Loader } from "../components/Loader";
 
 export const AllBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,7 +28,7 @@ export const AllBooks = () => {
   } = useGetBooksQuery(null);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const searchQueryValue = e.target.value.toLowerCase(); // Convert to lowercase
+    const searchQueryValue = e.target.value.toLowerCase();
     setSearchQuery(searchQueryValue);
   };
 
@@ -45,7 +46,7 @@ export const AllBooks = () => {
     const isMatchingSearch =
       book.title.toLowerCase().includes(searchQuery) ||
       book.author.toLowerCase().includes(searchQuery) ||
-      book.genre.includes(searchQuery);
+      book.genre.toLowerCase().includes(searchQuery);
     const isMatchingYear =
       selectedYear === "" ||
       new Date(book.publicationDate).getFullYear().toString() === selectedYear;
@@ -59,7 +60,7 @@ export const AllBooks = () => {
   );
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (isError) {

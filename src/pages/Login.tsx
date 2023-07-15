@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -10,6 +11,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LoginFormInputs } from "../types/globalTypes";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { loginUser } from "../redux/features/user/userSlice";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -17,7 +19,9 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user, isLoading, isError, error } = useAppSelector(
+    (state: { user: any }) => state.user
+  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,13 +29,15 @@ const Login = () => {
   const onSubmit = (data: LoginFormInputs) => {
     // Handle form submission here
     dispatch(loginUser({ email: data.email, password: data.password }));
-    console.log(data);
   };
   useEffect(() => {
     if (user.email && !isLoading) {
       navigate(from, { replace: true });
     }
   }, [user.email, isLoading, navigate, from]);
+  if (isError) {
+    toast.error(error);
+  }
   return (
     <div>
       <div className="m-auto xl:container px-12 sm:px-0 mx-auto">

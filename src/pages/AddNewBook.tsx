@@ -26,9 +26,9 @@ export const AddNewBook = () => {
     if ("data" in result) {
       reset();
       navigate("/all-books/");
-      console.log("Book created successfully!");
+      toast.success("Book created successfully!");
     } else {
-      console.error("Error creating book:", result.error);
+      toast.error("Error creating book");
     }
     setIsSubmitting(false);
   };

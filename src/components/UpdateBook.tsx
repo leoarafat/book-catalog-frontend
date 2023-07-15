@@ -8,17 +8,18 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { FormValues, IBooks } from "../types/globalTypes";
+import { FormValues } from "../types/globalTypes";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useSingleBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/books/bookApi";
 import { toast } from "react-hot-toast";
+import { Loader } from "./Loader";
 
 export const UpdateBook = () => {
   const { id } = useParams();
-  const { data: book, isLoading, isError, refetch } = useSingleBookQuery(id);
+  const { data: book, isLoading, isError } = useSingleBookQuery(id);
   const navigate = useNavigate();
   const {
     register,
@@ -50,7 +51,7 @@ export const UpdateBook = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (isError) {

@@ -19,6 +19,7 @@ import {
 import { toast } from "react-hot-toast";
 import { BookData } from "../types/globalTypes";
 import { useAppSelector } from "../redux/hooks";
+import { Loader } from "./Loader";
 
 const DetailsBook: React.FC<BookData> = () => {
   const [comment, setComment] = useState("");
@@ -31,6 +32,7 @@ const DetailsBook: React.FC<BookData> = () => {
   });
   const { user } = useAppSelector((state) => state.user);
   const [postComment, options] = usePostCommentMutation();
+  console.log(options);
   const [deleteBook, deleteBookOptions] = useDeleteBookMutation();
 
   const {
@@ -79,7 +81,7 @@ const DetailsBook: React.FC<BookData> = () => {
   };
 
   if (isLoading || deleteBookOptions.isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (isError || deleteBookOptions.isError) {
@@ -101,13 +103,15 @@ const DetailsBook: React.FC<BookData> = () => {
                     </button>
                   </Link>
                 )}
-                <button
-                  className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
-                  onClick={handleDeleteBook}
-                >
-                  <FaTrash className="inline-block mr-1" />
-                  Delete Book
-                </button>
+                {user?.email && (
+                  <button
+                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
+                    onClick={handleDeleteBook}
+                  >
+                    <FaTrash className="inline-block mr-1" />
+                    Delete Book
+                  </button>
+                )}
               </div>
               <h2 className="text-2xl font-bold mb-2">
                 {bookData?.data?.title}

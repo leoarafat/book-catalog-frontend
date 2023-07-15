@@ -6,12 +6,13 @@ import { toast } from "react-hot-toast";
 import TopBookCard from "../components/BookCard";
 import { useGetLatestBooksQuery } from "../redux/features/books/bookApi";
 import { IBooks } from "../types/globalTypes";
+import { Loader } from "../components/Loader";
 
 const TopBooks = () => {
   const { data, isLoading, isError, isSuccess } = useGetLatestBooksQuery(null);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (isError) {

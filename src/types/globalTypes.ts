@@ -5,7 +5,7 @@ export type FormValues = {
   publicationDate: string;
 };
 export type IBooks = {
-  _id: string;
+  _id?: string;
   title: string;
   author: string;
   genre: string;
