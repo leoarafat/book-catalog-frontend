@@ -30,9 +30,8 @@ const DetailsBook: React.FC<BookData> = () => {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
-  const { user } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state: { user: any }) => state.user);
   const [postComment, options] = usePostCommentMutation();
-  console.log(options);
   const [deleteBook, deleteBookOptions] = useDeleteBookMutation();
 
   const {
@@ -51,23 +50,34 @@ const DetailsBook: React.FC<BookData> = () => {
   };
 
   const handleDeleteBook = () => {
-    Swale.fire({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this book!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "Cancel",
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        deleteBook(id);
-        toast.success("Your book has been deleted.");
-        refetch();
-        navigate(`/all-books/`);
-      }
-    });
+    if (user.email === bookData?.data?.userEmail) {
+      Swale.fire({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this book!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+      }).then((result: any) => {
+        if (result.isConfirmed) {
+          deleteBook(id);
+          toast.success("Your book has been deleted.");
+          refetch();
+          navigate(`/all-books/`);
+        }
+      });
+    } else {
+      toast.error("You are not authorized to delete this book.");
+    }
+  };
+  const handleEditBook = () => {
+    if (user?.email === bookData?.data?.userEmail) {
+      navigate(`/update-book/${id}`);
+    } else {
+      toast.error("You are not authorized to update this book");
+    }
   };
 
   const handleCommentSubmit = () => {
@@ -95,14 +105,13 @@ const DetailsBook: React.FC<BookData> = () => {
             <div>
               <div className="flex mb-4 justify-between">
                 {" "}
-                {user?.email && (
-                  <Link to={`/update-book/${id}`}>
-                    <button className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors">
-                      <FaEdit className="inline-block mr-1" />
-                      Edit Book
-                    </button>
-                  </Link>
-                )}
+                <button
+                  className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
+                  onClick={handleEditBook}
+                >
+                  <FaEdit className="inline-block mr-1" />
+                  Edit Book
+                </button>
                 {user?.email && (
                   <button
                     className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm transition-colors"

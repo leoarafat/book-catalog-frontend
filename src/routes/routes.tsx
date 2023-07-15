@@ -8,6 +8,7 @@ import { AllBooks } from "../pages/AllBooks";
 import DetailsBook from "../components/DetailsBook";
 import { UpdateBook } from "../components/UpdateBook";
 import { NotFound } from "../components/NotFound";
+import { Wishlist } from "../components/Wishlist";
 
 export const routes = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const routes = createBrowserRouter([
             reviews={[]}
           />
         ),
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
       },
       {
         path: "/update-book/:id",

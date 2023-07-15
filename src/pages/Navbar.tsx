@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <div className="relative bg-yellow-50 dark:bg-gray-900">
-      <div className="bg-white dark:bg-darker">
+      <div className="bg-white dark:bg-gray-900">
         <nav className="w-full bg-white dark:bg-transparent">
           <div className="container m-auto px-2 md:px-12 lg:px-7">
             <div className="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
@@ -104,15 +104,18 @@ const Navbar = () => {
                 </div>
 
                 <div className="w-full min-w-max space-y-2 border-yellow-200 lg:space-y-0 sm:w-max lg:border-l dark:lg:border-gray-700">
-                  <button
-                    type="button"
-                    title="Start buying"
-                    className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 dark:active:bg-gray-700 dark:focus:bg-gray-800 focus:bg-yellow-100 sm:w-max"
-                  >
-                    <span className="block text-yellow-800">
-                      <BsFillHeartFill />
-                    </span>
-                  </button>
+                  <Link to="/wishlist">
+                    {" "}
+                    <button
+                      type="button"
+                      title="Start buying"
+                      className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 dark:active:bg-gray-700 dark:focus:bg-gray-800 focus:bg-yellow-100 sm:w-max"
+                    >
+                      <span className="block text-yellow-800">
+                        <BsFillHeartFill />
+                      </span>
+                    </button>
+                  </Link>
                   <>
                     {user?.email ? (
                       <button

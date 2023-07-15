@@ -5,12 +5,15 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { FormValues } from "../types/globalTypes";
+import { BookData, FormValues, IBooks } from "../types/globalTypes";
 import { useCreateBookMutation } from "../redux/features/books/bookApi";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
 
 export const AddNewBook = () => {
+  const { user } = useAppSelector((state) => state.user);
+
   const {
     register,
     handleSubmit,
@@ -22,7 +25,8 @@ export const AddNewBook = () => {
   const navigate = useNavigate();
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    const result = await createBook(data);
+    const bookData: BookData = { ...data, userEmail: user?.email };
+    const result = await createBook(bookData);
     if ("data" in result) {
       reset();
       navigate("/all-books/");

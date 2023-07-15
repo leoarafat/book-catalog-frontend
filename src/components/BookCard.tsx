@@ -34,31 +34,6 @@ const BookCard: FC<TopBookCardProps> = ({ book }) => {
 
   const [isInWishlist, setIsInWishlist] = useState(false);
 
-  // const handleWishlist = () => {
-  //   if (isInWishlist) {
-  //     // Book is already in the wishlist, perform removal logic
-  //     removeWishlist(_id!)
-  //       .unwrap()
-  //       .then(() => {
-  //         setIsInWishlist(false);
-  //         toast("Removed from Wishlist");
-  //       })
-  //       .catch((error) => {
-  //         toast.error("Error removing from Wishlist");
-  //       });
-  //   } else {
-  //     // Book is not in the wishlist, perform addition logic
-  //     createWishlist(book)
-  //       .unwrap()
-  //       .then(() => {
-  //         setIsInWishlist(true);
-  //         toast.success("Added to Wishlist");
-  //       })
-  //       .catch((error) => {
-  //         toast.error("Error adding to Wishlist");
-  //       });
-  //   }
-  // };
   const handleWishlist = () => {
     if (isInWishlist) {
       // Book is already in the wishlist, perform removal logic
@@ -109,7 +84,7 @@ const BookCard: FC<TopBookCardProps> = ({ book }) => {
       const wishlist = JSON.parse(storedWishlist);
       setIsInWishlist(wishlist.includes(_id));
     }
-  }, []);
+  }, [_id]);
 
   if (createLoading || removeLoading) {
     return <Loader />;

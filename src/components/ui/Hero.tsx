@@ -9,13 +9,13 @@ const Hero = () => {
         ></div>
         <div className="relative lg:flex lg:items-center lg:gap-12">
           <div className="text-center lg:text-left md:mt-12 lg:mt-0 sm:w-10/12 md:w-2/3 sm:mx-auto lg:mr-auto lg:w-6/12">
-            <h1 className="text-gray-900 font-bold text-4xl md:text-6xl lg:text-5xl xl:text-6xl dark:text-white">
+            <h1 className="text-gray-900 font-bold text-4xl md:text-6xl lg:text-5xl xl:text-6xl ">
               Embark on a Journey of Reading and Discovery with Read &{" "}
               <span className="text-primary dark:text-primaryLight">
                 Discover.
               </span>
             </h1>
-            <p className="mt-8 text-gray-600 dark:text-gray-300">
+            <p className="mt-8 text-gray-600 dark:text-gray-900">
               Embark on a Journey of Reading and Discovery with Read & Discover.
               Explore captivating stories, gain knowledge, and find new literary
               adventures. Start your reading pleasure today!
