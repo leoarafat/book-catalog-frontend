@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import MainLayout from "./layouts/MainLayouts";

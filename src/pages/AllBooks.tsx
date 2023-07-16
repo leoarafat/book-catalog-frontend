@@ -1,17 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Link } from "react-router-dom";
 import { useState, ChangeEvent } from "react";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
-import TopBookCard from "../components/BookCard";
 import { IBooks } from "../types/globalTypes";
 import { toast } from "react-hot-toast";
 import { useAppSelector } from "../redux/hooks";
 import { Loader } from "../components/Loader";
+import BookCard from "../components/BookCard";
 
 export const AllBooks = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -71,7 +65,7 @@ export const AllBooks = () => {
     <>
       {isSuccess && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 max-w-7xl mx-auto relative">
-          <div className="col-span-1 md:col-span-1 lg:col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky top-16 lg:static h-[calc(100vh-80px)]">
+          <div className="col-span-1 md:col-span-1 lg:col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky bg-gray-100 top-16 lg:static h-[calc(60vh-80px)]">
             <div>
               <h1 className="text-2xl uppercase">Search book</h1>
               <div className="flex items-center space-x-2 mt-3">
@@ -80,7 +74,7 @@ export const AllBooks = () => {
                   placeholder="Search by title, author, or genre"
                   value={searchQuery}
                   onChange={handleSearch}
-                  className="w-48 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
             </div>
@@ -97,7 +91,7 @@ export const AllBooks = () => {
                   id="year"
                   value={selectedYear}
                   onChange={handleYearChange}
-                  className="block px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-48"
+                  className="block w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
                   <option value="">All Years</option>
                   {Array.from(
@@ -124,7 +118,7 @@ export const AllBooks = () => {
                   id="genre"
                   value={selectedGenre}
                   onChange={handleGenreChange}
-                  className="block px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-48"
+                  className="block w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
                   <option value="">All Genres</option>
                   {genreOptions.map((genre: string) => (
@@ -154,7 +148,9 @@ export const AllBooks = () => {
 
           <div className="col-span-1 md:col-span-1 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-10 pb-8 md:pb-12 lg:pb-0">
             {filteredBooks?.map((book: IBooks) => (
-              <TopBookCard book={book} key={book._id} />
+              <div key={book._id} className="card-wrapper">
+                <BookCard book={book} />
+              </div>
             ))}
           </div>
         </div>
@@ -162,3 +158,5 @@ export const AllBooks = () => {
     </>
   );
 };
+
+export default AllBooks;

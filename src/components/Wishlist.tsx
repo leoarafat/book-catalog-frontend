@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useGetWishlistQuery } from "../redux/features/books/bookApi";
 import { IBooks } from "../types/globalTypes";
 import { Loader } from "./Loader";
@@ -24,7 +21,7 @@ export const Wishlist = () => {
         <div className="py-16">
           <div className="xl:container m-auto space-y-12 px-6 md:px-12 lg:px-20">
             <div>
-              <h2 className="mt-4 text-center text-2xl font-bold text-gray-800 dark:text-white md:text-4xl">
+              <h2 className="mt-4 text-center text-2xl font-bold text-gray-900  md:text-4xl">
                 Your Wishlist books <br className="sm:block" hidden />
                 Books
               </h2>
@@ -36,7 +33,7 @@ export const Wishlist = () => {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600 dark:text-gray-300">
+              <p className="text-center text-gray-600 dark:text-gray-900">
                 Your wishlist is empty.
               </p>
             )}

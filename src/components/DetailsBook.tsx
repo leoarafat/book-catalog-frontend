@@ -1,10 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useState, ChangeEvent } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
@@ -32,6 +25,7 @@ const DetailsBook: React.FC<BookData> = () => {
   });
   const { user } = useAppSelector((state: { user: any }) => state.user);
   const [postComment, options] = usePostCommentMutation();
+  console.log(options);
   const [deleteBook, deleteBookOptions] = useDeleteBookMutation();
 
   const {
@@ -81,7 +75,6 @@ const DetailsBook: React.FC<BookData> = () => {
   };
 
   const handleCommentSubmit = () => {
-    console.log(comment);
     const options = {
       id: id,
       data: { reviews: comment },
@@ -105,14 +98,16 @@ const DetailsBook: React.FC<BookData> = () => {
             <div>
               <div className="flex mb-4 justify-between">
                 {" "}
-                <button
-                  className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
-                  onClick={handleEditBook}
-                >
-                  <FaEdit className="inline-block mr-1" />
-                  Edit Book
-                </button>
-                {user?.email && (
+                {user.email === bookData?.data?.userEmail && (
+                  <button
+                    className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
+                    onClick={handleEditBook}
+                  >
+                    <FaEdit className="inline-block mr-1" />
+                    Edit Book
+                  </button>
+                )}
+                {user?.email === bookData?.data?.userEmail && (
                   <button
                     className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm transition-colors"
                     onClick={handleDeleteBook}

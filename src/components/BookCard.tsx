@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { FC, useEffect, useState } from "react";
 import { IBooks } from "../types/globalTypes";
 import { Link } from "react-router-dom";
@@ -52,7 +48,7 @@ const BookCard: FC<TopBookCardProps> = ({ book }) => {
             localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
           }
         })
-        .catch((error) => {
+        .catch(() => {
           toast.error("Error removing from Wishlist");
         });
     } else {
@@ -72,7 +68,7 @@ const BookCard: FC<TopBookCardProps> = ({ book }) => {
             localStorage.setItem("wishlist", JSON.stringify([_id]));
           }
         })
-        .catch((error) => {
+        .catch(() => {
           toast.error("Error adding to Wishlist");
         });
     }
@@ -92,7 +88,7 @@ const BookCard: FC<TopBookCardProps> = ({ book }) => {
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="h-full p-8 py-12 sm:p-12 rounded-3xl bg-white border border-gray-100 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10">
+      <div className="h-[600px] p-8 py-12 sm:p-12 rounded-3xl bg-white border border-gray-100 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10">
         <div className="space-y-12 text-center">
           <img
             src="https://cdn-icons-png.flaticon.com/512/4341/4341069.png"
@@ -121,11 +117,11 @@ const BookCard: FC<TopBookCardProps> = ({ book }) => {
               <AiOutlineClockCircle className="text-gray-600 dark:text-white text-2xl transition duration-300 group-hover:text-blue-500" />
               <AiOutlineCheckCircle className="text-gray-600 dark:text-white text-2xl transition duration-300 group-hover:text-green-500" />
             </div>
-            <Link
-              to={`/book-details/${_id!}`}
-              className="inline-block px-4 py-2 mt-4 text-white transition duration-300 bg-blue-500 rounded hover:bg-blue-600"
-            >
-              View Details
+
+            <Link to={`/book-details/${_id}`}>
+              <button className="inline-block px-4 py-2 mt-4 text-white transition duration-300 bg-blue-500 rounded hover:bg-blue-600">
+                View Details
+              </button>
             </Link>
           </div>
         </div>
