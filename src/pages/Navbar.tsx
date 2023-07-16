@@ -37,8 +37,8 @@ const Navbar = () => {
 
   return (
     <div className="relative bg-yellow-50 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-900">
-        <nav className="w-full bg-white dark:bg-transparent">
+      <div className=" dark:bg-gray-900">
+        <nav className="w-full  dark:bg-transparent">
           <div className="container m-auto px-2 md:px-12 lg:px-7">
             <div className="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
               <input
@@ -141,17 +141,17 @@ const Navbar = () => {
                     </span>
                   </button>
                   {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                    <div className="absolute right-0 mt-2 w-56  rounded-lg shadow-lg">
                       <ul className="py-2">
                         <Link to="/wishlist">
                           {" "}
-                          <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          <li className="px-4 py-2  hover:bg-purple-600 ">
                             Wishlist
                           </li>
                         </Link>
                         <Link to="/read-soon">
                           {" "}
-                          <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          <li className="px-4 py-2 hover:bg-purple-600 ">
                             Plan To Read
                           </li>
                         </Link>

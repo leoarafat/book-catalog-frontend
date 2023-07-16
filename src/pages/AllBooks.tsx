@@ -65,7 +65,7 @@ export const AllBooks = () => {
     <>
       {isSuccess && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 max-w-7xl mx-auto relative">
-          <div className="col-span-1 md:col-span-1 lg:col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky bg-gray-100 top-16 lg:static h-[calc(60vh-80px)]">
+          <div className="col-span-1 md:col-span-1 lg:col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky  top-16 lg:static h-[calc(60vh-80px)]">
             <div>
               <h1 className="text-2xl uppercase">Search book</h1>
               <div className="flex items-center space-x-2 mt-3">
@@ -74,24 +74,21 @@ export const AllBooks = () => {
                   placeholder="Search by title, author, or genre"
                   value={searchQuery}
                   onChange={handleSearch}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="text-gray-900 font-semibold w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
             </div>
             <div className="space-y-3">
               <h1 className="text-2xl uppercase">Filters book</h1>
               <div className="max-w-xl">
-                <label
-                  htmlFor="year"
-                  className="text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="year" className="text-sm font-medium t">
                   Publication Year:
                 </label>
                 <select
                   id="year"
                   value={selectedYear}
                   onChange={handleYearChange}
-                  className="block w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="block text-gray-900 font-semibold w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
                   <option value="">All Years</option>
                   {Array.from(
@@ -108,17 +105,14 @@ export const AllBooks = () => {
                 </select>
               </div>
               <div className="max-w-xl">
-                <label
-                  htmlFor="genre"
-                  className="text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="genre" className="text-sm font-medium t">
                   Genre:
                 </label>
                 <select
                   id="genre"
                   value={selectedGenre}
                   onChange={handleGenreChange}
-                  className="block w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="block w-full text-gray-900 font-semibold px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
                   <option value="">All Genres</option>
                   {genreOptions.map((genre: string) => (

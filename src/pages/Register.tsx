@@ -4,7 +4,6 @@ import { useAppDispatch } from "../redux/hooks";
 import { createUser } from "../redux/features/user/userSlice";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const Register = () => {
   const {
@@ -18,17 +17,16 @@ const Register = () => {
     // Handle form submission here
     dispatch(createUser({ email: data.email, password: data.password }));
     toast.success("User created successfully");
-  };
-  useEffect(() => {
     navigate("/");
-  }, [navigate]);
+  };
+
   return (
     <div>
       <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
         <div className="mx-auto h-full sm:w-max">
           <div className="m-auto  py-12">
-            <div className="mt-12 rounded-3xl border bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
-              <h3 className="text-2xl font-semibold text-gray-700 dark:text-white">
+            <div className="mt-12 rounded-3xl border light:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
+              <h3 className="text-2xl font-semibold dark:text-white">
                 SignUp here
               </h3>
               <div className="mt-12 flex flex-wrap sm:grid gap-6 grid-cols-2">

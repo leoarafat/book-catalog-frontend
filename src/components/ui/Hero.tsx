@@ -9,20 +9,20 @@ const Hero = () => {
         ></div>
         <div className="relative lg:flex lg:items-center lg:gap-12">
           <div className="text-center lg:text-left md:mt-12 lg:mt-0 sm:w-10/12 md:w-2/3 sm:mx-auto lg:mr-auto lg:w-6/12">
-            <h1 className="text-gray-900 font-bold text-4xl md:text-6xl lg:text-5xl xl:text-6xl ">
+            <h1 className=" font-bold text-4xl md:text-6xl lg:text-5xl xl:text-6xl ">
               Embark on a Journey of Reading and Discovery with Read &{" "}
               <span className="text-primary dark:text-primaryLight">
                 Discover.
               </span>
             </h1>
-            <p className="mt-8 text-gray-600 dark:text-gray-900">
+            <p className="mt-8">
               Embark on a Journey of Reading and Discovery with Read & Discover.
               Explore captivating stories, gain knowledge, and find new literary
               adventures. Start your reading pleasure today!
             </p>
             <div>
               <form action="" className="w-full mt-12">
-                <div className="relative flex items-center px-2 p-1 rounded-full bg-white dark:bg-gray-900 border dark:border-gray-700 border-primary/10 shadow-md md:p-2 lg:pr-3">
+                <div className="relative flex items-center px-2 p-1 rounded-full bg-white  border border-primary/10 shadow-md md:p-2 lg:pr-3">
                   <div className="pl-6 py-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ const Hero = () => {
                       title="Start buying"
                       className="relative h-12 w-20 sm:w-auto ml-auto sm:px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary dark:before:bg-primaryLight before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
                     >
-                      <span className="relative hidden w-max text-white dark:text-gray-900 font-semibold md:block">
+                      <span className="relative hidden w-max text-white  font-semibold md:block">
                         Get Started
                       </span>
                       <svg
@@ -79,11 +79,7 @@ const Hero = () => {
                 className="h-8 sm:h-10 w-auto lg:h-12"
                 alt=""
               />
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Coty_logo.svg/2560px-Coty_logo.svg.png"
-                className="h-8 sm:h-10 w-auto lg:h-12"
-                alt=""
-              />
+
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png"
                 className="h-8 sm:h-10 w-auto lg:h-12"

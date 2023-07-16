@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
     <div>
-      <footer className="w-full bg-gray-100 dark:bg-gray-900 py-16">
+      <footer className="w-full  dark:bg-gray-900 py-16">
         <div className="md:px-12 lg:px-28">
-          <div className="container m-auto space-y-6 text-gray-600 dark:text-gray-300">
+          <div className="container m-auto space-y-6  ">
             <img
               src="https://png.pngtree.com/template/20190316/ourmid/pngtree-books-logo-image_79143.jpg"
               alt="logo tailus"
