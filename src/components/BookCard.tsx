@@ -146,14 +146,14 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
                 {isInWishlist ? (
                   <AiFillHeart className="text-red-500 text-2xl transition duration-300 group-hover:text-red-700" />
                 ) : (
-                  <AiOutlineHeart className="text-gray-600 dark:text-white text-2xl transition duration-300 group-hover:text-red-500" />
+                  <AiOutlineHeart className="text-gray-600  text-2xl transition duration-300 group-hover:text-red-500" />
                 )}
               </button>
               <button onClick={handleAddToReading}>
                 {isAddedToReading ? (
                   <AiFillClockCircle className="text-blue-500 text-2xl transition duration-300 group-hover:text-blue-700" />
                 ) : (
-                  <AiOutlineClockCircle className="text-gray-600 dark:text-white text-2xl transition duration-300 group-hover:text-blue-500" />
+                  <AiOutlineClockCircle className="text-gray-600  text-2xl transition duration-300 group-hover:text-blue-500" />
                 )}
               </button>
             </div>
