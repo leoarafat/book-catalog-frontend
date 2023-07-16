@@ -25,12 +25,10 @@ const Register = () => {
       <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
         <div className="mx-auto h-full sm:w-max">
           <div className="m-auto  py-12">
-            <div className="mt-12 rounded-3xl border light:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
-              <h3 className="text-2xl font-semibold dark:text-white">
-                SignUp here
-              </h3>
+            <div className="mt-12 rounded-3xl border light:bg-gray-50 dark:border-gray-700  -mx-6 sm:-mx-10 p-8 sm:p-10">
+              <h3 className="text-2xl font-semibold ">SignUp here</h3>
               <div className="mt-12 flex flex-wrap sm:grid gap-6 grid-cols-2">
-                <button className="w-full h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
+                <button className="w-full h-11 rounded-full border border-gray-300/75  px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
                   <div className="w-max mx-auto flex items-center justify-center space-x-4">
                     <img src="images/google.svg" className="w-5" alt="" />
                     <span className="block w-max text-sm font-semibold tracking-wide text-cyan-700 dark:text-white">
@@ -57,7 +55,7 @@ const Register = () => {
 
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="mt-10 space-y-8 dark:text-white"
+                className="mt-10 space-y-8 "
               >
                 <div>
                   <div

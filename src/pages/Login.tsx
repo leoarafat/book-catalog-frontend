@@ -34,11 +34,11 @@ const Login = () => {
   }
   return (
     <div>
-      <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
+      <div className="m-auto xl:container px-12 sm:px-0 mx-auto ">
         <div className="mx-auto h-full sm:w-max">
           <div className="m-auto  py-12">
-            <div className="mt-12 rounded-3xl border light:bg-gray-50   -mx-6 sm:-mx-10 p-8 sm:p-10">
-              <h3 className="text-2xl font-semibold  dark:text-white">
+            <div className="mt-12 rounded-3xl border    -mx-6 sm:-mx-10 p-8 sm:p-10">
+              <h3 className="text-2xl font-semibold  ">
                 Login into your account
               </h3>
 
