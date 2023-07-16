@@ -6,7 +6,14 @@ export const api = createApi({
     // baseUrl: "https://book-catalog-backend-gamma.vercel.app/api/v1",
     baseUrl: "http://localhost:5000/api/v1",
   }),
-  tagTypes: ["comments", "post", "update", "deletepost", "wishlist"],
+  tagTypes: [
+    "comments",
+    "post",
+    "update",
+    "deletepost",
+    "wishlist",
+    "reading-list",
+  ],
 
   endpoints: () => ({}),
 });

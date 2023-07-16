@@ -111,13 +111,19 @@ export const AddNewBook = () => {
         <input
           type="text"
           id="publicationDate"
-          {...register("publicationDate", { required: true })}
+          {...register("publicationDate", {
+            required: true,
+            pattern: {
+              value: /^\d{4}-\d{2}-\d{2}$/,
+              message: "Invalid publication date format (YYYY-MM-DD)",
+            },
+          })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.publicationDate ? "border-red-500" : "border-gray-300"
           }`}
         />
         {errors.publicationDate && (
-          <span className="text-red-500">Publication Date is required</span>
+          <span className="text-red-500">{errors.publicationDate.message}</span>
         )}
       </div>
 

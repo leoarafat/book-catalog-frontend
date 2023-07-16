@@ -1,4 +1,4 @@
-import { BookData, IBooks } from "../../../types/globalTypes";
+import { BookData, IBooks, ReadData } from "../../../types/globalTypes";
 import { api } from "../../api/apiSlice";
 
 const bookApi = api.injectEndpoints({
@@ -58,6 +58,14 @@ const bookApi = api.injectEndpoints({
       }),
       invalidatesTags: ["wishlist"],
     }),
+    createReadingList: builder.mutation<ReadData, Partial<ReadData>>({
+      query: (bookData: IBooks) => ({
+        url: "/books/reading-list",
+        method: "POST",
+        body: bookData,
+      }),
+      invalidatesTags: ["reading-list"],
+    }),
     removeWishlist: builder.mutation<IBooks | null, string>({
       query: (bookId) => ({
         url: `/books/wishlist/${bookId}`,
@@ -65,9 +73,21 @@ const bookApi = api.injectEndpoints({
       }),
       invalidatesTags: ["wishlist"],
     }),
+    removeReadingList: builder.mutation<IBooks | null, string>({
+      query: (bookId) => ({
+        url: `/books/reading-list/${bookId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["reading-list"],
+    }),
+
     getWishlist: builder.query({
       query: () => "/books/wishlist",
       providesTags: ["wishlist"],
+    }),
+    getReadingList: builder.query({
+      query: () => "/books/reading-list",
+      providesTags: ["reading-list"],
     }),
   }),
 });
@@ -84,4 +104,7 @@ export const {
   useCreateWishlistMutation,
   useRemoveWishlistMutation,
   useGetWishlistQuery,
+  useCreateReadingListMutation,
+  useGetReadingListQuery,
+  useRemoveReadingListMutation,
 } = bookApi;

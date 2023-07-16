@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { BsFillHeartFill } from "react-icons/bs";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setUser } from "../redux/features/user/userSlice";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import { setUser } from "../redux/features/user/userSlice";
 
 const Navbar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
@@ -15,6 +17,9 @@ const Navbar = () => {
       // Sign-out successful.
       dispatch(setUser(null));
     });
+  };
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -98,18 +103,35 @@ const Navbar = () => {
                 </div>
 
                 <div className="w-full min-w-max space-y-2 border-yellow-200 lg:space-y-0 sm:w-max lg:border-l dark:lg:border-gray-700">
-                  <Link to="/wishlist">
-                    {" "}
-                    <button
-                      type="button"
-                      title="Start buying"
-                      className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 dark:active:bg-gray-700 dark:focus:bg-gray-800 focus:bg-yellow-100 sm:w-max"
-                    >
-                      <span className="block text-yellow-800">
-                        <BsFillHeartFill />
-                      </span>
-                    </button>
-                  </Link>
+                  {" "}
+                  <button
+                    type="button"
+                    title="Start buying"
+                    className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 dark:active:bg-gray-700 dark:focus:bg-gray-800 focus:bg-yellow-100 sm:w-max"
+                    onClick={toggleDropdown}
+                  >
+                    <span className="block text-yellow-800">
+                      <BsFillHeartFill />
+                    </span>
+                  </button>
+                  {isDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                      <ul className="py-2">
+                        <Link to="/wishlist">
+                          {" "}
+                          <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Wishlist
+                          </li>
+                        </Link>
+                        <Link to="/read-soon">
+                          {" "}
+                          <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Plan To Read
+                          </li>
+                        </Link>
+                      </ul>
+                    </div>
+                  )}
                   <>
                     {user?.email ? (
                       <button

@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import { SignUpFormInputs } from "../types/globalTypes";
 import { useAppDispatch } from "../redux/hooks";
 import { createUser } from "../redux/features/user/userSlice";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Register = () => {
   const {
@@ -9,13 +12,16 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpFormInputs>();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onSubmit = (data: SignUpFormInputs) => {
     // Handle form submission here
     dispatch(createUser({ email: data.email, password: data.password }));
-    console.log(data);
+    toast.success("User created successfully");
   };
-
+  useEffect(() => {
+    navigate("/");
+  }, [navigate]);
   return (
     <div>
       <div className="m-auto xl:container px-12 sm:px-0 mx-auto">

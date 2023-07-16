@@ -9,6 +9,7 @@ import DetailsBook from "../components/DetailsBook";
 import { UpdateBook } from "../components/UpdateBook";
 import { NotFound } from "../components/NotFound";
 import { Wishlist } from "../components/Wishlist";
+import { ReadSoon } from "../components/ReadSoon";
 
 export const routes = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const routes = createBrowserRouter([
       {
         path: "/wishlist",
         element: <Wishlist />,
+      },
+      {
+        path: "/read-soon",
+        element: <ReadSoon />,
       },
       {
         path: "/update-book/:id",

@@ -26,6 +26,7 @@ const Login = () => {
   useEffect(() => {
     if (user.email && !isLoading) {
       navigate(from, { replace: true });
+      toast.success("User loggedin Successfully");
     }
   }, [user.email, isLoading, navigate, from]);
   if (isError) {

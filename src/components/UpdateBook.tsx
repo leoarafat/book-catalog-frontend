@@ -35,7 +35,7 @@ export const UpdateBook = () => {
       setIsSubmitting(false);
     } catch (error) {
       // Display an error toast
-      toast.error("Failed to update book");
+      toast.error(`${error}`);
 
       // Reset the form
       setIsSubmitting(false);
