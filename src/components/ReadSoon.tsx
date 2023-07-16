@@ -3,6 +3,7 @@ import { IBooks } from "../types/globalTypes";
 import { Loader } from "./Loader";
 import { toast } from "react-hot-toast";
 import BookCard from "./BookCard";
+import { Progress } from "./ProcessBar";
 
 export const ReadSoon = () => {
   const { data, isLoading, isError, isSuccess } = useGetReadingListQuery(null);
@@ -22,9 +23,10 @@ export const ReadSoon = () => {
           <div className="xl:container m-auto space-y-12 px-6 md:px-12 lg:px-20">
             <div>
               <h2 className="mt-4 text-center text-2xl font-bold text-gray-900  md:text-4xl">
-                Your Reading <br className="sm:block" hidden />
-                List
+                Plan To Reading <br className="sm:block" hidden />
+                These Books
               </h2>
+              <Progress />
             </div>
             {data?.data.length > 0 ? (
               <div className="mt-16 grid gap-8 sm:w-2/3 sm:mx-auto md:w-full md:grid-cols-2 md:-mx-8 lg:grid-cols-3">

@@ -42,10 +42,7 @@ export const AddNewBook = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto">
       <div className="mb-4">
-        <label
-          htmlFor="title"
-          className="block mb-2 text-lg font-medium text-gray-700"
-        >
+        <label htmlFor="title" className="block mb-2 text-lg font-medium">
           Title
         </label>
         <input
@@ -54,7 +51,7 @@ export const AddNewBook = () => {
           {...register("title", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.title ? "border-red-500" : "border-gray-300"
-          }`}
+          } text-gray-900`} // Set text color to gray-900
         />
         {errors.title && (
           <span className="text-red-500">Title is required</span>
@@ -62,10 +59,7 @@ export const AddNewBook = () => {
       </div>
 
       <div className="mb-4">
-        <label
-          htmlFor="author"
-          className="block mb-2 text-lg font-medium text-gray-700"
-        >
+        <label htmlFor="author" className="block mb-2 text-lg font-medium">
           Author
         </label>
         <input
@@ -74,7 +68,7 @@ export const AddNewBook = () => {
           {...register("author", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.author ? "border-red-500" : "border-gray-300"
-          }`}
+          } text-gray-900`} // Set text color to gray-900
         />
         {errors.author && (
           <span className="text-red-500">Author is required</span>
@@ -82,10 +76,7 @@ export const AddNewBook = () => {
       </div>
 
       <div className="mb-4">
-        <label
-          htmlFor="genre"
-          className="block mb-2 text-lg font-medium text-gray-700"
-        >
+        <label htmlFor="genre" className="block mb-2 text-lg font-medium">
           Genre
         </label>
         <input
@@ -93,8 +84,8 @@ export const AddNewBook = () => {
           id="genre"
           {...register("genre", { required: true })}
           className={`w-full px-4 py-2 border rounded-lg ${
-            errors.genre ? "border-red-500" : "border-gray-300"
-          }`}
+            errors.genre ? "border-red-500" : "border-gray-300 "
+          } text-gray-900`} // Set text color to gray-900
         />
         {errors.genre && (
           <span className="text-red-500">Genre is required</span>
@@ -104,7 +95,7 @@ export const AddNewBook = () => {
       <div className="mb-4">
         <label
           htmlFor="publicationDate"
-          className="block mb-2 text-lg font-medium text-gray-700"
+          className="block mb-2 text-lg font-medium"
         >
           Publication Date
         </label>
@@ -120,7 +111,7 @@ export const AddNewBook = () => {
           })}
           className={`w-full px-4 py-2 border rounded-lg ${
             errors.publicationDate ? "border-red-500" : "border-gray-300"
-          }`}
+          } text-gray-900`} // Set text color to gray-900
         />
         {errors.publicationDate && (
           <span className="text-red-500">{errors.publicationDate.message}</span>

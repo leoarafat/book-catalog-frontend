@@ -134,7 +134,7 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="h-[400px] p-8 py-12 sm:p-12 rounded-3xl  border border-gray-100 dark:shadow-none  bg-opacity-10 shadow-2xl shadow-gray-600/10">
+      <div className="h-[400px] p-8 py-12 sm:p-12 rounded-3xl b border border-gray-100 dark:shadow-none  bg-opacity-50 shadow-2xl shadow-gray-600/10">
         <div className="space-y-12 text-center">
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold  transition">{title}</h3>
