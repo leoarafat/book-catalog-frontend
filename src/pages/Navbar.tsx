@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 import { BsFillHeartFill } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { setUser } from "../redux/features/user/userSlice";
+import { toggleTheme } from "../redux/features/theme/themeSlice";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { BiLogIn, BiMoon, BiSun } from "react-icons/bi";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
+  const themeMode = useAppSelector((state) => state.theme.mode);
 
   const handleLogout = () => {
     signOut(auth).then(() => {
@@ -21,6 +25,15 @@ const Navbar = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme());
+  };
+  useEffect(() => {
+    document.body.classList.add(themeMode);
+    return () => {
+      document.body.classList.remove(themeMode);
+    };
+  }, [themeMode]);
 
   return (
     <div className="relative bg-yellow-50 dark:bg-gray-900">
@@ -99,11 +112,24 @@ const Navbar = () => {
                         <span>All Books</span>
                       </Link>
                     </li>
+                    <li>
+                      <button
+                        onClick={handleToggleTheme}
+                        type="button"
+                        title="Toggle Theme"
+                        className="flex items-center focus:outline-none"
+                      >
+                        {themeMode === "dark" ? (
+                          <BiSun className="text-yellow-900 dark:text-yellow-300 text-lg" />
+                        ) : (
+                          <BiMoon className="text-yellow-900 dark:text-yellow-300 text-lg" />
+                        )}
+                      </button>
+                    </li>
                   </ul>
                 </div>
 
                 <div className="w-full min-w-max space-y-2 border-yellow-200 lg:space-y-0 sm:w-max lg:border-l dark:lg:border-gray-700">
-                  {" "}
                   <button
                     type="button"
                     title="Start buying"
@@ -132,33 +158,32 @@ const Navbar = () => {
                       </ul>
                     </div>
                   )}
-                  <>
-                    {user?.email ? (
+                  {user?.email ? (
+                    <button
+                      onClick={handleLogout}
+                      type="button"
+                      title="Want to Logout?"
+                      className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                    >
+                      <span className="block text-yellow-900 font-semibold text-sm">
+                        LogOut{" "}
+                        <RiLogoutBoxRLine className="inline-block ml-1 text-lg" />
+                      </span>
+                    </button>
+                  ) : (
+                    <Link to="/login">
                       <button
-                        onClick={handleLogout}
                         type="button"
-                        title="Want to Logout?"
+                        title="Start buying"
                         className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
                       >
                         <span className="block text-yellow-900 font-semibold text-sm">
-                          LogOut
+                          Login{" "}
+                          <BiLogIn className="inline-block ml-1 text-lg" />
                         </span>
                       </button>
-                    ) : (
-                      <Link to="/login">
-                        {" "}
-                        <button
-                          type="button"
-                          title="Start buying"
-                          className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
-                        >
-                          <span className="block text-yellow-900 font-semibold text-sm">
-                            Login
-                          </span>
-                        </button>
-                      </Link>
-                    )}
-                  </>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api/apiSlice";
 import userSlice from "./features/user/userSlice";
+import themeSlice from "./features/theme/themeSlice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    theme: themeSlice,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
